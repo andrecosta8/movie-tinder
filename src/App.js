@@ -1,9 +1,11 @@
-import './App.css';
+import Navbar from './components/Header/Header';
+import Body from './pages/Body/Body';
 
 function App() {
   return (
-    <div className="App">
-      
+    <div>
+     <Navbar/>
+     <Body />
     </div>
   );
 }
