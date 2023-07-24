@@ -16,6 +16,9 @@ export const movieSlice = createSlice({
       state.favorites.push(action.payload)
       localStorage.setItem('favorites', JSON.stringify(state.favorites))
     },
+    setInitialFavorites: (state, action) => {
+      state.favorites = action.payload
+    },
     removeFavorite: (state, action) => {
       const movieIdToRemove = action.payload;
       state.favorites = state.favorites.filter((movie) => movie.id !== movieIdToRemove.id);
@@ -23,10 +26,14 @@ export const movieSlice = createSlice({
     },
     removeAllFavorites: (state, action) => {
       state.favorites = []
+      localStorage.setItem('favorites', JSON.stringify(state.favorites));
     },
     addToDisliked: (state, action) => {
       state.disliked.push(action.payload)
       localStorage.setItem('disliked', JSON.stringify(state.disliked))
+    },
+    setInitialDisliked: (state, action) => {
+      state.disliked = action.payload
     },
     removeDisliked: (state, action) => {
       const movieIdToRemove = action.payload;
@@ -35,14 +42,16 @@ export const movieSlice = createSlice({
     },
     removeAllDisliked: (state, action) => {
       state.disliked = []
+      localStorage.setItem('disliked', JSON.stringify(state.disliked));
     },
 
     addSearchResults: (state, action) => {
-      return {
-        ...state,
-        searchResults: action.payload,
-      };
-    }
+      state.searchResults = action.payload
+    },
+    removeSearchItem: (state, action) => {
+      const movieIdToRemove = action.payload;
+      state.searchResults = state.searchResults.filter((movie) => movie.id !== movieIdToRemove.id);
+    },
   },
 })
 
@@ -55,7 +64,10 @@ export const {
   removeDisliked,
   addSearchResults,
   removeAllDisliked,
-  removeAllFavorites
+  removeAllFavorites,
+  setInitialFavorites,
+  setInitialDisliked,
+  removeSearchItem
 } = movieSlice.actions
 
 export default movieSlice.reducer

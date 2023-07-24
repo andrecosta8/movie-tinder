@@ -1,0 +1,65 @@
+.search-page {
+    width: 100vw;
+    min-height:90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,0.6446953781512605) 0%, rgba(248,249,248,1) 50%);
+
+
+    @media(max-width: 480px) {
+      padding-top: 10vh;
+    }
+}
+
+.search-container {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 450px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid;
+    border-color: #0d76b5;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    padding: 10px 20px;
+    transition: 0.8s;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      inset -7px -7px 10px 0px rgba(0, 0, 0, 0.1),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.3),
+      -4px -4px 6px rgba(116, 125, 136, 0.2);
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.3),
+      -4px -4px 6px 0 rgba(116, 125, 136, 0.2),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, 0.2);
+
+      @media(max-width: 480px) {
+        width:300px;
+       
+      }
+  }
+  
+  .search-container:hover > .search-input {
+    width: 300px;
+  }
+  
+  .search-container .search-input {
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    outline: none;
+    transition: 0.8s;
+    width: 0px;
+  }
+  
+  .search-container:hover {
+    animation: hoverShake 0.15s linear 3;
+  }
+  

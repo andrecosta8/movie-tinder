@@ -8,14 +8,28 @@ import { movieControl } from "../../utils/movieControl";
 import styled from "styled-components";
 
 const MovieWallPage = styled.div`
-height: 90vh;
-width:100vw;
-background-color:grey;
-display:flex;
-justify-content: center;
-align-items:center
+  height: 90vh;
+  width:100vw;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  background: rgb(0,0,0);
+  background: linear-gradient(90deg, rgba(0,0,0,0.6446953781512605) 0%, rgba(248,249,248,1) 50%);
+
+  @media(max-width: 480px) {
+    padding-top: 10vh;
+  }
 `;
 
+const Tip = styled.h3`
+font-size: 0.8em;
+text-align: center;
+
+  @media(max-width: 480px) {
+    width: 250px;
+  }
+`;
 
 const MovieWall = () => {
   const dispatch = useDispatch();
@@ -37,21 +51,27 @@ const MovieWall = () => {
     getMovieToDisplay()
   }
 
-
   const getMovieToDisplay = async () => {
-    let filmID = Math.floor(Math.random() * 999) + 1;
-    let response = await getRandomMovie(filmID);
-    const checkMovie = movieControl(filmID, disliked, favorites)
-    if (response === null || checkMovie === false) {
-      getMovieToDisplay()
-    } else {
-      dispatch(addRandomMovie(response.data))
+    try {
+      let filmID = Math.floor(Math.random() * 999) + 1;
+      let response = await getRandomMovie(filmID);
+      const checkMovie = movieControl(filmID, disliked, favorites)
+      if (response === null || checkMovie === false) {
+        getMovieToDisplay()
+      } else {
+        dispatch(addRandomMovie(response.data))
+      }
+    } catch (err) {
+      console.error(err)
     }
   }
 
   return (
     <MovieWallPage>
-        <MovieCard movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
+      <MovieCard movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
+      <Tip>TIP: Use the like or dislike button to add the movie to your favorites or to your disliked movies.
+        Also you can swipe the movie image: Right to like, left to dislike.
+      </Tip>
     </MovieWallPage>
   );
 };
