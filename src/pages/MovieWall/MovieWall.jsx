@@ -23,8 +23,8 @@ const MovieWallPage = styled.div`
 `;
 
 const Tip = styled.h3`
-font-size: 0.8em;
-text-align: center;
+  font-size: 0.8em;
+  text-align: center;
 
   @media(max-width: 480px) {
     width: 250px;
@@ -68,8 +68,8 @@ const MovieWall = () => {
 
   return (
     <MovieWallPage>
-      <MovieCard movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
-      <Tip>TIP: Use the like or dislike button to add the movie to your favorites or to your disliked movies.
+      <MovieCard data-testid="movie-card" movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
+      <Tip data-testid="tip" >TIP: Use the like or dislike button to add the movie to your favorites or to your disliked movies.
         Also you can swipe the movie image: Right to like, left to dislike.
       </Tip>
     </MovieWallPage>
