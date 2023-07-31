@@ -6,6 +6,10 @@ import MovieList from "../../components/MovieList/MovieList";
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../../utils/notifications";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 const WallOfShamePage = styled.div`
   min-height:90vh;
@@ -32,18 +36,29 @@ const WallOfShame = () => {
 
   const removeFromDisliked = movie => {
     dispatch(removeDisliked(movie))
+    notify(`${movie.title} has been removed from your wall of shame`)
   }
+
+  const removeAllDislikedMovies = () => {
+    dispatch(removeAllDisliked())
+    notify("All your movies have been removed from your wall of shame")
+  }
+
   return (
     <WallOfShamePage>
+      <ToastContainer />
       {disliked.length > 0 ?
-        <Button
-          variant="outlined"
-          sx={{ color: "#0d76b5", top: "1em" }}
-          startIcon={<DeleteIcon />}
-          onClick={() => dispatch(removeAllDisliked())}
-        >
-          Remove All
-        </Button>
+        <>
+          <Button
+            variant="outlined"
+            sx={{ color: "#0d76b5", top: "1em" }}
+            startIcon={<DeleteIcon />}
+            onClick={() => removeAllDislikedMovies()}
+          >
+            Remove All
+          </Button>
+          <ScrollToTop />
+        </>
         :
         <p>You don't have any disliked movies!</p>}
       <MovieList movies={disliked} action={removeFromDisliked} />

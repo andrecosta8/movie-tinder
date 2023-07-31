@@ -7,15 +7,14 @@
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(0,0,0,0.6446953781512605) 0%, rgba(248,249,248,1) 50%);
 
-
     @media(max-width: 480px) {
       padding-top: 10vh;
     }
 }
 
 .search-container {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin-top: 1em;
+    z-index:999;
     width: 450px;
     align-items: center;
     background: #fff;
@@ -41,6 +40,7 @@
 
       @media(max-width: 480px) {
         width:300px;
+        position: fixed;
        
       }
   }
@@ -59,7 +59,8 @@
     width: 0px;
   }
   
-  .search-container:hover {
-    animation: hoverShake 0.15s linear 3;
+  .movie-card{
+    margin-top: 5em;
+    margin-bottom:2em;
   }
   

@@ -6,6 +6,11 @@ import MovieList from "../../components/MovieList/MovieList";
 import styled from "styled-components";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../../utils/notifications";
+import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
+
 
 const FavoritesPage = styled.div`
   min-height:90vh;
@@ -32,19 +37,30 @@ const Favorites = () => {
 
   const removeFromFavorites = movie => {
     dispatch(removeFavorite(movie))
+    notify(`${movie.title} has been removed from your favorites`)
+
+  }
+
+  const removeAllFavoriteMovies = () => {
+    dispatch(removeAllFavorites())
+    notify("All your movies have been removed from your favorites")
   }
 
   return (
     <FavoritesPage>
+      <ToastContainer />
       {favorites.length > 0 ?
+      <>
         <Button
           variant="outlined"
           sx={{ color: "#0d76b5", top: "1em" }}
           startIcon={<DeleteIcon />}
-          onClick={() => dispatch(removeAllFavorites())}
+          onClick={() => removeAllFavoriteMovies()}
         >
           Remove All
         </Button>
+        <ScrollToTop />
+        </>
         :
         <p>You don't have any favorite movies!</p>}
       <MovieList movies={favorites} action={removeFromFavorites} />

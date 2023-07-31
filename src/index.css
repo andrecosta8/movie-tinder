@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Tektur', sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+  font-family: 'RalewayDots'; /* Provide a name for your font */
+  src: url('../src/assets/fonts/RalewayDots-Regular.ttf') format('truetype'); /* Adjust the path based on your font file name and format */
+  /* You can add more src declarations for different font formats like woff, woff2, etc. */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tektur'; /* Provide a name for your font */
+  src: url('../src/assets/fonts/Tektur-VariableFont_wdth\,wght.ttf') format('truetype'); /* Adjust the path based on your font file name and format */
+  /* You can add more src declarations for different font formats like woff, woff2, etc. */
+  font-weight: normal;
+  font-style: normal;
 }

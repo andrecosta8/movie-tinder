@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSearchResults, addToDisliked, addToFavorites, removeSearchItem } from "../../redux/movieSlice";
 import { searchMovies } from "../../utils/apiCalls";
@@ -7,7 +7,6 @@ import './SearchResults.css'
 import SearchIcon from "@mui/icons-material/Search";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import { movieControl } from "../../utils/movieControl";
-
 
 const SearchResults = () => {
   const searchResults = useSelector((state) => state.movie.searchResults);
@@ -19,19 +18,20 @@ const SearchResults = () => {
     dispatch(addSearchResults([]))
   }, [])
 
+  const timeoutRef = useRef(null);
+
   const inputSearchHandler = (e) => {
-    let timeOutId;
-    if (timeOutId) {
-      clearTimeout(timeOutId);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
-    timeOutId = setTimeout(async () => {
+
+    timeoutRef.current = setTimeout(async () => {
       try {
         let response = await searchMovies(e.target.value);
         dispatch(addSearchResults(response.data.results));
       } catch (err) {
-        console.error(err)
+        console.error(err);
       }
-
     }, 1500);
   };
 
@@ -70,12 +70,16 @@ const SearchResults = () => {
         />
         <SearchIcon sx={{ color: "#0d76b5" }} />
       </div>
-      {searchResults.map((elem) => {
+      {searchResults.length > 0 ?  searchResults.map((elem) => {
         return (
-          <MovieCard movie={elem} addFavorite={handleFavorite} addDislike={handleDislike} />
-        )
-      })}
-
+          <div className="movie-card">
+          <MovieCard key={elem.id} movie={elem} addFavorite={handleFavorite} addDislike={handleDislike} />
+          </div>
+          )
+      }) 
+      :
+      <p>No results for your search</p>
+       }
     </div>
   );
 };

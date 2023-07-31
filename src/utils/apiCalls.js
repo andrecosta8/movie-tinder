@@ -8,17 +8,14 @@ const getRandomMovie = async (filmID) => {
         return await axios.get(`${BASE_URL}/movie/${filmID}s?api_key=${API_KEY}&language=en-US&page=1`);
     } catch (error) {
         console.error('Error fetching random movie', error);
-        return null;
     }
 };
 
 const searchMovies = async (query) => {
-    console.log(query)
     try {
         return await axios.get(`${BASE_URL}/search/movie?query=${query}&api_key=${API_KEY}`);
     } catch (error) {
         console.error('Error searching movies:', error);
-        return [];
     }
 };
 

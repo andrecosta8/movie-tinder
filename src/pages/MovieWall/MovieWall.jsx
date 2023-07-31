@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRandomMovie, addToDisliked, addToFavorites } from "../../redux/movieSlice";
 import { movieControl } from "../../utils/movieControl";
 import styled from "styled-components";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from "../../utils/notifications";
 
 const MovieWallPage = styled.div`
   height: 90vh;
@@ -27,7 +30,7 @@ const Tip = styled.h3`
   text-align: center;
 
   @media(max-width: 480px) {
-    width: 250px;
+    width:80vw;
   }
 `;
 
@@ -68,9 +71,9 @@ const MovieWall = () => {
 
   return (
     <MovieWallPage>
-      <MovieCard data-testid="movie-card" movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
-      <Tip data-testid="tip" >TIP: Use the like or dislike button to add the movie to your favorites or to your disliked movies.
-        Also you can swipe the movie image: Right to like, left to dislike.
+      <ToastContainer />
+      <MovieCard movie={movie} addFavorite={handleFavorite} addDislike={handleDislike} />
+      <Tip>HINT: Swipe left to add to disliked or right to add to favorites. Or use the buttons.
       </Tip>
     </MovieWallPage>
   );
